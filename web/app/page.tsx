@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Show, UserButton } from "@clerk/nextjs";
 
 /* ─── Inline SVG icons (Lucide outlines — no emoji, no icon packs) ─── */
 
@@ -127,18 +128,29 @@ export default function Home() {
             </span>
           </Link>
           <div className="flex items-center gap-3">
-            <Link
-              href="/onboarding"
-              className="hidden rounded-full px-4 py-2 text-sm font-semibold text-foreground transition-colors duration-200 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:block"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/onboarding"
-              className="cursor-pointer rounded-full bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors duration-200 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            >
-              Get started
-            </Link>
+            <Show when="signed-out">
+              <Link
+                href="/sign-in"
+                className="hidden rounded-full px-4 py-2 text-sm font-semibold text-foreground transition-colors duration-200 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:block"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/sign-up"
+                className="cursor-pointer rounded-full bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors duration-200 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                Get started
+              </Link>
+            </Show>
+            <Show when="signed-in">
+              <Link
+                href="/onboarding"
+                className="cursor-pointer rounded-full bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors duration-200 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                Open app
+              </Link>
+              <UserButton />
+            </Show>
           </div>
         </nav>
       </header>
