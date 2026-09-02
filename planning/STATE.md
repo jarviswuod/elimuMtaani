@@ -10,7 +10,8 @@ Architecture → Build handoff. The Architect Pack for Sprint 001 is complete an
 
 | Sprint | Status |
 |---|---|
-| 001-unified-hackathon-demo | **Pack complete — ready for Builder** |
+| 001-unified-hackathon-demo | **In build — Checkpoint 1 auth done** |
+| 002-game-based-learning | **Pack complete — blocked on 001 Checkpoints 1–3** |
 
 ## Next Action
 

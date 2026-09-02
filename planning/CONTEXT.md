@@ -64,7 +64,8 @@ Layered / feature-sliced Next.js app with Convex as backend-for-frontend — see
 
 | Sprint | Name | Status | Key Decisions |
 |---|---|---|---|
-| 001 | Unified Hackathon Demo (Teacher + Student) | Architect pack complete, not built | DEC-001–DEC-011: no video encoding, Convex as sole backend, Convex persistence, real-but-narrowed research/timetable/delivery scope, KICD live scrape, unified sprint merge, frontend-design skill landing page, verified model IDs, provenance labels, fixtures mode, citations/structured-output split |
+| 001 | Unified Hackathon Demo (Teacher + Student) | In build — Checkpoint 1 auth done (Clerk+Convex live) | DEC-001–DEC-014: no video encoding, Convex as sole backend, Convex persistence, real-but-narrowed research/timetable/delivery scope, KICD live scrape, unified sprint merge, frontend-design skill landing page, verified model IDs, provenance labels, fixtures mode, citations/structured-output split, web/ location, team tooling |
+| 002 | Game-Based Learning + Understanding Gate | Architect pack complete, not built (depends on 001 Checkpoints 1–3) | DEC-015–DEC-018: library-first game branch, schema-enforced real-game bar, whole-class understanding gate (teacher judgment, aggregate-only), games permanently classroom-only |
 
 **Note:** This sprint originally existed in two draft forms — "001-student-core-path" (student-only) and a planned separate "002-teacher-cbc-path" — before the operator requested the expanded teacher research/timetable/delivery/leaderboard scope. Per DEC-006, both were merged into this single unified Sprint 001. No code was written against either earlier draft.
 
@@ -84,4 +85,4 @@ See `planning/DECISIONS.md`
 
 ## What Comes Next
 
-Hand `planning/sprints/001-unified-hackathon-demo/handoff-prompt.md` to the Builder agent. Builder should follow the phased implementation sequence in that file so a working demo exists at multiple checkpoints, not just at the very end. After the hackathon demo, return to the Architect to plan the post-hackathon roadmap items listed in `planning/DOMAIN.md`.
+Finish Sprint 001 via `planning/sprints/001-unified-hackathon-demo/handoff-prompt.md` (Checkpoint 1 auth is done; lecture pipeline next). Once Checkpoints 1–3 ship, Sprint 002 (`planning/sprints/002-game-based-learning/handoff-prompt.md`) adds the game branch and the understanding gate. After the hackathon demo, return to the Architect for the roadmap items in `planning/DOMAIN.md`.
