@@ -24,7 +24,7 @@ Builder continues `planning/sprints/001-unified-hackathon-demo/handoff-prompt.md
 
 Remaining for Checkpoint 1: `lib/claude.ts`, `lib/slides.ts`, `generateLecture` action, `SlidePlayer`, student topic→lecture flow.
 
-**Note:** the accountless Clerk app is unclaimed — run `npx clerk@latest open` on the host to get the claim URL (do not paste it into logs/PRs) and claim it into the team's Clerk account before the demo. Google-only OAuth is configured post-claim.
+**Update 2026-09-02 (later):** Clerk is now on the team's real app — CLI authenticated (anthonyonyango635@gmail.com), project linked to `app_3IlyEJXIUImwH5G4fA0O4HLklTz` ("elimu-mtasni", dev instance `ins_3IlyELbr…`, issuer `eternal-albacore-2958.clerk.accounts.dev`). The `convex` JWT template was re-created on this app (`jtmp_3Im02N8Uef3Nx2SJ13aKCrAvjb7`) and `CLERK_JWT_ISSUER_DOMAIN` updated on the Convex deployment. The earlier accountless app is orphaned/unused. Remaining Clerk task: enable Google-only OAuth in the dashboard (currently instance defaults). `/__clerk/:path*` proxy matcher and `Show`-based nav auth controls are in.
 
 ## Working Agreements
 
