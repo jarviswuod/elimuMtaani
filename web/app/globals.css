@@ -1,21 +1,24 @@
 @import "tailwindcss";
 
+/* Design tokens v2 (Sprint 003, DEC-019): warm-paper editorial — deep Kenyan
+   green ink + terracotta accent. Variable NAMES are stable; components
+   reference tokens, never raw hex. */
 :root {
-  --background: #faf5ff;
-  --foreground: #1e1b4b;
-  --primary: #7c3aed;
+  --background: #faf6ef;
+  --foreground: #1f2a24;
+  --primary: #1e6b4e;
   --on-primary: #ffffff;
-  --secondary: #a78bfa;
-  --on-secondary: #0f172a;
-  --accent: #0891b2;
+  --secondary: #7fb69a;
+  --on-secondary: #1f2a24;
+  --accent: #c4521f;
   --on-accent: #ffffff;
-  --card: #ffffff;
-  --card-foreground: #1e1b4b;
-  --muted: #eceef9;
-  --muted-foreground: #475569;
-  --border: #ddd6fe;
-  --destructive: #dc2626;
-  --ring: #7c3aed;
+  --card: #fffdf8;
+  --card-foreground: #1f2a24;
+  --muted: #f0e9dc;
+  --muted-foreground: #5b6660;
+  --border: #ded2bc;
+  --destructive: #b3261e;
+  --ring: #1e6b4e;
 }
 
 @theme inline {
@@ -34,13 +37,21 @@
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-ring: var(--ring);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-karla);
+  --font-display: var(--font-fraunces);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-karla), system-ui, sans-serif;
+}
+
+h1,
+h2,
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  letter-spacing: -0.01em;
 }
 
 ::selection {

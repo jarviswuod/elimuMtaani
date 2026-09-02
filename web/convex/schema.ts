@@ -147,4 +147,15 @@ export default defineSchema({
   })
     .index("by_timetableId", ["timetableId"])
     .index("by_teacherId", ["teacherId"]),
+
+  // NotebookLM-style notes (CP-C, DEC-022): user-owned snippets saved from chat,
+  // lecture pages, or typed manually. R1: userId is always the saver (never a learner).
+  notes: defineTable({
+    userId: v.id("users"),
+    title: v.string(),
+    body: v.string(),
+    sourceType: v.union(v.literal("chat"), v.literal("lecture"), v.literal("manual")),
+    lectureId: v.optional(v.id("lectures")),
+    topic: v.optional(v.string()),
+  }).index("by_userId", ["userId"]),
 });

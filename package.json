@@ -20,6 +20,7 @@
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "typescript": "^5.7.2"
   },
   "allowScripts": {
