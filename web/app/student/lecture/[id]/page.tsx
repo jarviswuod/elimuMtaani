@@ -6,6 +6,8 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { SlidePlayer } from "@/components/SlidePlayer";
+import { QuizCard } from "@/components/QuizCard";
+import { ChatPanel } from "@/components/ChatPanel";
 
 export default function LecturePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -33,6 +35,11 @@ export default function LecturePage({ params }: { params: Promise<{ id: string }
       <h1 className="mb-6 text-2xl font-extrabold tracking-tight sm:text-3xl">{lecture.topic}</h1>
 
       <SlidePlayer slides={lecture.slides} mode="live" topic={lecture.topic} />
+
+      <div className="mt-8 grid items-start gap-8 lg:grid-cols-2">
+        <QuizCard lectureId={lecture._id} />
+        {lecture.source === "open" && <ChatPanel lectureId={lecture._id} />}
+      </div>
     </main>
   );
 }
