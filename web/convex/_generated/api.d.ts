@@ -8,6 +8,10 @@
  * @module
  */
 
+import type * as actions_generateLecture from "../actions/generateLecture.js";
+import type * as fixtures_lecture from "../fixtures/lecture.js";
+import type * as lectures from "../lectures.js";
+import type * as lib_claude from "../lib/claude.js";
 import type * as users from "../users.js";
 
 import type {
@@ -17,6 +21,10 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  "actions/generateLecture": typeof actions_generateLecture;
+  "fixtures/lecture": typeof fixtures_lecture;
+  lectures: typeof lectures;
+  "lib/claude": typeof lib_claude;
   users: typeof users;
 }>;
 
