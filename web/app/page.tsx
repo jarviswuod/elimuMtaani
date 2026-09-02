@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
+import { DemoLogin } from "@/components/DemoLogin";
 
 /* ─── Inline SVG icons (Lucide outlines — no emoji, no icon packs) ─── */
 
@@ -265,6 +266,78 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Demo accounts */}
+        <section id="demo" className="border-t border-border" aria-labelledby="demo-heading">
+          <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6">
+            <div className="text-center">
+              <p className="text-sm font-bold uppercase tracking-wider text-accent">Try it now</p>
+              <h2 id="demo-heading" className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+                Explore with a demo account
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-lg leading-8 text-muted-foreground">
+                No sign-up needed. Click once to log in as a demo teacher or student and see the full
+                experience — rich data, real workflows, nothing redacted.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2">
+              <div className="rounded-2xl border border-border bg-card p-8">
+                <p className="text-xs font-bold uppercase tracking-wider text-accent">Teacher view</p>
+                <h3 className="mt-2 text-xl font-bold">Demo Teacher</h3>
+                <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
+                  <li className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    Full Grade 8 Integrated Science term plan — 2 weeks seeded
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    5 advanced sessions, 1 multi-attempt revisit in progress
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    Curriculum progress rings, understanding trend, revisit radar
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    KICD knowledge base + saved notes
+                  </li>
+                </ul>
+                <div className="mt-6">
+                  <DemoLogin role="teacher" />
+                </div>
+              </div>
+              <div className="rounded-2xl border border-border bg-card p-8">
+                <p className="text-xs font-bold uppercase tracking-wider text-accent">Student view</p>
+                <h3 className="mt-2 text-xl font-bold">Demo Student</h3>
+                <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
+                  <li className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    5 open lectures generated on different topics
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    Quiz scores, badges, and activity stats visible
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    Saved notes from lecture content
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    Ask follow-up questions and save answers to notes
+                  </li>
+                </ul>
+                <div className="mt-6">
+                  <DemoLogin role="student" />
+                </div>
+              </div>
+            </div>
+            <p className="mt-6 text-center text-xs text-muted-foreground">
+              Demo accounts are shared — any changes you make are visible to other demo users.
+              Create your own account for a private workspace.
+            </p>
           </div>
         </section>
 
