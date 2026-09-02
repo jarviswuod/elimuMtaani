@@ -44,6 +44,13 @@ export const create = internalMutation({
   },
 });
 
+export const setSimplifiedSummary = internalMutation({
+  args: { lectureId: v.id("lectures"), summary: v.string() },
+  handler: async (ctx, { lectureId, summary }) => {
+    await ctx.db.patch(lectureId, { simplifiedSummary: summary });
+  },
+});
+
 export const get = query({
   args: { id: v.id("lectures") },
   handler: async (ctx, { id }) => ctx.db.get(id),

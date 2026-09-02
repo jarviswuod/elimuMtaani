@@ -34,6 +34,7 @@ export default defineSchema({
     ),
     deliveredBy: v.optional(v.id("users")),
     createdBy: v.id("users"),
+    simplifiedSummary: v.optional(v.string()), // cached haiku output for the student review view
   }).index("by_createdBy", ["createdBy"]),
 
   chatMessages: defineTable({
