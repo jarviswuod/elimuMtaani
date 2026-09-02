@@ -86,13 +86,25 @@ export default defineSchema({
     ),
   }).index("by_teacherId", ["teacherId"]),
 
+  // Understanding-gate shape (Sprint 002 blueprint / DEC-017): attempts are
+  // aggregate-only — the teacher's stand-in score + whole-class judgment.
+  // Never any individual learner data (R1).
   sessions: defineTable({
     timetableId: v.id("timetables"),
     weekIdx: v.number(),
     dayIdx: v.number(),
     lectureId: v.id("lectures"),
-    quizScore: v.number(),
-    revisitFlag: v.boolean(),
+    teacherId: v.id("users"),
+    attempts: v.array(
+      v.object({
+        quizScore: v.number(),
+        classReady: v.boolean(),
+        reviewAction: v.optional(v.union(v.literal("recap"), v.literal("game_round"))),
+      }),
+    ),
+    status: v.union(v.literal("open"), v.literal("advanced")),
     deliveredAt: v.number(),
-  }).index("by_timetableId", ["timetableId"]),
+  })
+    .index("by_timetableId", ["timetableId"])
+    .index("by_teacherId", ["teacherId"]),
 });

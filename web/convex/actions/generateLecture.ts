@@ -56,6 +56,13 @@ export const run = action({
       source: args.source,
       timetableRef: args.timetableRef,
     });
+    // Link onto the timetable day so reopening never regenerates (RISK-001).
+    if (args.timetableRef) {
+      await ctx.runMutation(internal.timetables.linkLecture, {
+        ...args.timetableRef,
+        lectureId,
+      });
+    }
     return lectureId;
   },
 });
