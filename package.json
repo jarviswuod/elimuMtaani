@@ -1,0 +1,29 @@
+{
+  "name": "elimu-mwalimu-grade10",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "up": "docker compose -f docker/docker-compose.yml up --build",
+    "down": "docker compose -f docker/docker-compose.yml down",
+    "db:reset": "docker compose -f docker/docker-compose.yml down -v && docker compose -f docker/docker-compose.yml up -d db",
+    "migrate": "npm run migrate --workspace @elimu/backend",
+    "seed": "npm run seed --workspace @elimu/backend",
+    "build:shared": "npm run build --workspace @elimu/shared",
+    "dev:backend": "npm run dev --workspace @elimu/backend",
+    "dev:frontend": "npm run dev --workspace @elimu/frontend",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "esbuild@0.25.12": true
+  }
+}

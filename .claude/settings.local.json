@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(npm view *)",
+      "Bash(google-chrome --headless --disable-gpu --no-sandbox --no-pdf-header-footer --print-to-pdf=\"Elimu-Team-Brief.pdf\" \"team-brief.html\")",
+      "Bash(echo \"exit=$?\")",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"console.log\\('zod:', require\\('./node_modules/zod/package.json'\\).version\\)\")",
+      "Bash(node -e \"const p=require\\('./node_modules/@anthropic-ai/sdk/package.json'\\); console.log\\(JSON.stringify\\({peer:p.peerDependencies,dev:p.devDependencies&&p.devDependencies.zod},null,1\\)\\)\")",
+      "Bash(npm approve-scripts *)",
+      "Bash(npx tsx *)",
+      "Bash(curl -s -m 1 localhost:4000/api/health)",
+      "Bash(break)",
+      "Bash(curl -s localhost:4000/api/health)",
+      "Bash(curl -s localhost:4000/api/packs/sample)",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const p=JSON.parse\\(d\\);console.log\\('sections:',Object.keys\\(p.sections\\).join\\(', '\\)\\);console.log\\('spine total:',p.sections.spine.steps.reduce\\(\\(a,s\\)=>a+s.durationMinutes,0\\),'min of',p.context.lessonMinutes\\);console.log\\('warnings:',p.warnings\\);}\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" localhost:4000/api/packs/nope)",
+      "Bash(pkill -f \"tsx src/index.ts\")",
+      "Bash(npx vite *)"
+    ]
+  }
+}

@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Elimu — Mwalimu wa Grade 10 — Team Brief</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 14mm; }
+
+  :root {
+    --ink: #16211c;
+    --soft: #55625b;
+    --accent: #1f4e3d;
+    --warn: #8a4b0f;
+    --rule: #d5cfc4;
+    --tint: #f4f1ea;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    font-size: 10pt;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  h1 { font-size: 21pt; line-height: 1.15; margin: 0 0 2mm; letter-spacing: -0.01em; }
+  h2 {
+    font-size: 12.5pt; margin: 7mm 0 2.5mm; padding-bottom: 1.2mm;
+    border-bottom: 1.5pt solid var(--accent); color: var(--accent);
+    break-after: avoid;
+  }
+  h3 { font-size: 10.5pt; margin: 4mm 0 1.5mm; break-after: avoid; }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 2.5mm; padding-left: 5mm; }
+  li { margin-bottom: 1.2mm; }
+
+  .lede { font-size: 11pt; color: var(--soft); margin-bottom: 4mm; }
+  .kicker { font-size: 8.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 2mm; }
+
+  .rule-box {
+    background: var(--tint); border-left: 3pt solid var(--accent);
+    padding: 3mm 4mm; margin: 0 0 4mm;
+  }
+  .rule-box p:last-child { margin-bottom: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 0 0 3mm; font-size: 9pt; }
+  th, td { text-align: left; padding: 1.6mm 2mm; border-bottom: 0.5pt solid var(--rule); vertical-align: top; }
+  th { background: var(--tint); font-size: 8pt; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .member { break-inside: avoid; page-break-inside: avoid; margin-bottom: 6mm; }
+  .member-head {
+    display: flex; align-items: baseline; gap: 3mm;
+    border-bottom: 1pt solid var(--ink); padding-bottom: 1.5mm; margin-bottom: 2.5mm;
+  }
+  .member-num {
+    font-size: 15pt; font-weight: bold; color: var(--accent);
+    min-width: 12mm;
+  }
+  .member-title { font-size: 12pt; font-weight: bold; }
+  .member-owns { font-size: 8pt; color: var(--soft); font-family: "SF Mono", Menlo, Consolas, monospace; }
+
+  .feat { margin-bottom: 2.5mm; }
+  .feat-name { font-weight: bold; }
+  .feat-done { color: var(--soft); font-size: 9pt; display: block; }
+  .feat-done::before { content: "Done when: "; font-variant: small-caps; letter-spacing: 0.03em; }
+
+  code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 8.8pt; background: var(--tint); padding: 0 0.8mm; }
+
+  .page-break { break-before: page; page-break-before: always; }
+
+  .warn { color: var(--warn); font-weight: bold; }
+
+  .timeline td:first-child { font-family: "SF Mono", Menlo, Consolas, monospace; white-space: nowrap; width: 18mm; }
+
+  .demo { counter-reset: beat; }
+  .demo li { margin-bottom: 1.8mm; }
+
+  footer {
+    margin-top: 6mm; padding-top: 2mm; border-top: 0.5pt solid var(--rule);
+    font-size: 8pt; color: var(--soft);
+  }
+</style>
+</head>
+<body>
+
+<div class="kicker">Hackathon build brief &middot; Track: Elimu</div>
+<h1>Mwalimu wa Grade&nbsp;10</h1>
+<p class="lede">
+  Night-before teaching packs for a Grade 10 teacher preparing a strand she was never trained
+  for, with no textbook and no internet in the room. Built online at night, used entirely
+  offline in the classroom, holding no learner data.
+</p>
+
+<h2>What we are actually solving</h2>
+<p>
+  A curriculum design document tells a teacher the <strong>outcome</strong> — "the learner
+  should be able to explain X" — and never tells her X. With no textbook delivered, there is
+  nowhere for her to go and learn X. So three problems are stacked inside one brief:
+</p>
+<ol>
+  <li><strong>She doesn't know the content.</strong> The design states outcomes, not subject matter.</li>
+  <li><strong>She can't deliver it with what's in the room.</strong> The design's suggested
+    activities quietly assume a lab, a library, a projector, or internet research. She has chalk
+    and fifty learners.</li>
+  <li><strong>She has to defend the plan.</strong> Schemes of work get inspected. A plan she
+    can't source is a liability.</li>
+</ol>
+
+<div class="rule-box">
+  <p><strong>The rule that shapes every decision we make today:</strong></p>
+  <p>
+    <span class="warn">She cannot verify our output.</span> Nobody in that room can. A farmer
+    knows if the depot turned him away; a nurse knows a bad history when she reads one. A
+    teacher who was never trained on this strand has no way to detect that we invented a
+    plausible-sounding falsehood — and she will teach it to fifty children.
+  </p>
+  <p>
+    So <strong>provenance matters more than polish.</strong> Every line in a pack either traces
+    to the design document with a page number, or is visibly labelled as generated. This is not
+    a disclaimer we bolt on at the end. It is the product.
+  </p>
+</div>
+
+<h2>The artifact: one Night-Before Pack</h2>
+<p>
+  Scoped to one sub-strand, one lesson. Eight sections, fixed order — and the order <em>is</em>
+  the product, because understanding has to come before delivery.
+</p>
+<table>
+  <tr><th style="width:34mm">Section</th><th>What it answers</th><th style="width:20mm">Source</th></tr>
+  <tr><td><strong>1. What this actually is</strong></td><td>The subject matter, pitched at a competent adult who has never seen the topic. Worked examples. The misconceptions <em>she</em> probably holds.</td><td>generated</td></tr>
+  <tr><td><strong>2. Why it's here</strong></td><td>Learning outcomes and the key inquiry question, quoted verbatim and cited to a page.</td><td>design</td></tr>
+  <tr><td><strong>3. Tomorrow's 40 minutes</strong></td><td>Minute-by-minute: hook, board work, activity, check, closure.</td><td>template</td></tr>
+  <tr><td><strong>4. Board plan</strong></td><td>What to draw and write, in order, in chalk, in under 90 seconds — and what to say while drawing it.</td><td>generated</td></tr>
+  <tr><td><strong>5. The activity, with nothing</strong></td><td>Fifty learners, no textbook, no lab, no printing, no power. Materials from the local market.</td><td>generated</td></tr>
+  <tr><td><strong>6. They will ask you this</strong></td><td>The questions learners actually ask, answered — plus a dignified script for admitting you don't know.</td><td>generated</td></tr>
+  <tr><td><strong>7. How you'll know they got it</strong></td><td>Three quick checks and a four-level rubric.</td><td>template</td></tr>
+  <tr><td><strong>8. What to verify</strong></td><td>Which lines came from the document and which we generated. Honesty rendered as a section.</td><td>—</td></tr>
+</table>
+
+<h2>Architecture in one line</h2>
+<p>
+  A <strong>structured curriculum tree</strong> feeds <strong>six narrow generators</strong>,
+  whose output is a <strong>self-contained pack</strong> that lives on the device and prints to paper.
+</p>
+<p>
+  Three decisions follow from that, and they are the ones that will save or sink the day:
+</p>
+<ul>
+  <li><strong>Parse the curriculum into structure — don't retrieve over PDF chunks.</strong>
+    The designs are already structured. A parsed tree gives exact, citable nodes; chunked
+    retrieval gives fuzzy matches and citations we can't stand behind. The corpus is a few dozen
+    sub-strands — it's a JSON file, not a vector database.</li>
+  <li><strong>Six small generators, never one mega-prompt.</strong> Each has its own contract,
+    its own validation, its own risk profile. A partial failure still ships a usable pack; a
+    monolith fails whole.</li>
+  <li><strong>Offline is a file problem, not a runtime problem.</strong> Once downloaded, a pack
+    needs no server, no API, no model. Then offline isn't something we engineered — it's a
+    property we get free.</li>
+</ul>
+
+<h2>Ownership map</h2>
+<p>Stay inside your own directories. Need something in someone else's? Ask them — don't reach in.</p>
+<table>
+  <tr><th style="width:8mm">#</th><th style="width:48mm">Workstream</th><th>Owns</th></tr>
+  <tr><td>1</td><td>Curriculum &amp; Data</td><td><code>data/curriculum/</code> &middot; <code>backend/db/</code> &middot; <code>backend/src/modules/curriculum/</code></td></tr>
+  <tr><td>2</td><td>Generation Engine</td><td><code>backend/src/modules/generation/</code></td></tr>
+  <tr><td>3</td><td>Pack API, Cache &amp; Export</td><td><code>backend/src/modules/packs/</code></td></tr>
+  <tr><td>4</td><td>Prep Flow (frontend)</td><td><code>frontend/src/features/</code> &middot; <code>api/</code> &middot; <code>components/</code></td></tr>
+  <tr><td>5</td><td>Offline, Print &amp; Share</td><td><code>frontend/src/offline/</code> &middot; <code>print/</code> &middot; <code>public/</code></td></tr>
+  <tr><td>—</td><td><strong>Frozen</strong></td><td><code>shared/</code> &middot; <code>docker/</code> &middot; root configs — changes need a group decision</td></tr>
+</table>
+
+<div class="page-break"></div>
+<h2>Member 1 &mdash; Curriculum &amp; Data</h2>
+
+<div class="member">
+  <div class="member-head">
+    <div class="member-title">You own the grounding source. Everything downstream cites you.</div>
+  </div>
+  <div class="feat"><span class="feat-name">1. Hand-enter the corpus.</span>
+    One subject, one strand, three to six sub-strands. Outcomes, inquiry questions and suggested
+    experiences <strong>verbatim</strong>, each with a real page number.
+    <span class="feat-done">the JSON matches <code>shared/src/curriculum.ts</code> and every node has a page.</span>
+  </div>
+  <div class="feat"><span class="feat-name">2. Idempotent seed loader.</span>
+    <code>npm run seed</code> loads <code>data/curriculum/*.json</code> into Postgres with
+    <code>ON CONFLICT DO UPDATE</code>. You'll run it twenty times today.
+    <span class="feat-done">running it twice in a row changes nothing and errors nowhere.</span>
+  </div>
+  <div class="feat"><span class="feat-name">3. Curriculum read API.</span>
+    The four GET endpoints in <code>shared/src/api.ts</code>. Every object carries its
+    <code>SourceRef</code> — a query that drops <code>doc_page</code> is a bug, not an omission.
+    <span class="feat-done">you can walk subject &rarr; strand &rarr; sub-strand &rarr; detail with curl.</span>
+  </div>
+  <div class="feat"><span class="feat-name">4. Tag <code>assumedResources</code>.</span>
+    For each suggested experience, list what it quietly assumes she has: internet, laboratory,
+    textbook, projector, printer, field trip. This single field is what Member 2's activity
+    translator runs on.
+    <span class="feat-done">every experience has a list, and empty means "needs no translation".</span>
+  </div>
+  <div class="feat"><span class="feat-name">5. Citation formatter.</span>
+    One helper that renders a <code>SourceRef</code> as <em>"KICD CSL Grade 10 Design, p.&nbsp;24"</em>.
+    Used by the UI and the PDF export so a citation never renders two different ways.
+    <span class="feat-done">frontend and export both call it; neither formats a citation itself.</span>
+  </div>
+</div>
+
+<h2>Member 2 &mdash; Generation Engine</h2>
+
+<div class="member">
+  <div class="member-head">
+    <div class="member-title">You own the only code that talks to the model — and the section she can't check.</div>
+  </div>
+  <div class="feat"><span class="feat-name">1. Briefing generator.</span>
+    Teaches the <em>teacher</em> the content. Effort <code>max</code> — this is the one section
+    with no document to fall back on, so it carries the whole verification risk. Scope it hard
+    to the outcome text; include the misconceptions she is likely to hold herself.
+    <span class="feat-done">someone who doesn't know the topic can read it and teach the lesson.</span>
+  </div>
+  <div class="feat"><span class="feat-name">2. Activity translator.</span>
+    Takes a real suggested experience plus its <code>assumedResources</code> and her actual
+    resource level, and rewrites it for her room. Grounded by construction — the input is a real
+    document line. Every material free or a few shillings, plus a no-materials fallback.
+    <span class="feat-done">the learning intent is identical and nothing on the list needs a shop.</span>
+  </div>
+  <div class="feat"><span class="feat-name">3. Board plan generator.</span>
+    One to four chalk panels: what to draw, what to say while drawing it, optional ASCII sketch.
+    The blackboard is our render target — there is no projector.
+    <span class="feat-done">you could stand at a board and follow it without rereading.</span>
+  </div>
+  <div class="feat"><span class="feat-name">4. Questions and rubric generators.</span>
+    Three to eight questions learners really ask, answered, plus the don't-know script. Quick
+    checks and a four-level rubric row per outcome.
+    <span class="feat-done">both return schema-valid output with no missing rubric level.</span>
+  </div>
+  <div class="feat"><span class="feat-name">5. Orchestrator with graceful degradation.</span>
+    <code>Promise.allSettled</code> across the generators; each rejection becomes a warning and a
+    missing section, never a failed request. <strong>Your code stamps provenance, never the
+    model</strong> — the model does not get to tell us how trustworthy it is.
+    <span class="feat-done">you can break one generator on purpose and still get a usable pack.</span>
+  </div>
+</div>
+
+<div class="page-break"></div>
+<h2>Member 3 &mdash; Pack API, Cache &amp; Export</h2>
+
+<div class="member">
+  <div class="member-head">
+    <div class="member-title">You own the artifact leaving the building — and the demo's insurance policy.</div>
+  </div>
+  <div class="feat"><span class="feat-name">1. <code>POST /api/packs</code> end to end.</span>
+    Validate, check cache, load sub-strand, generate, persist, return.
+    <span class="feat-done">one curl produces a complete stored pack.</span>
+  </div>
+  <div class="feat"><span class="feat-name">2. The cache.</span>
+    <code>sha256(sub-strand + context)</code>, unique index, DB hit before any API call. The
+    second teacher to ask about a sub-strand pays nothing and waits nothing.
+    <span class="feat-done">an identical repeat request returns instantly with zero API calls, and you can show that.</span>
+  </div>
+  <div class="feat"><span class="feat-name">3. Self-contained HTML export.</span>
+    One file, inline CSS, zero external requests. This is what makes offline free and makes
+    teacher-to-teacher sharing need no infrastructure at all.
+    <span class="feat-done">the file opens correctly from the filesystem with wifi off.</span>
+  </div>
+  <div class="feat"><span class="feat-name">4. PDF export.</span>
+    Server-side render of that same HTML. Two sides of A4 — there is no power at the front of
+    her classroom, so paper is a real output format.
+    <span class="feat-done">it prints legibly on physical A4 without cutting a section in half.</span>
+  </div>
+  <div class="feat"><span class="feat-name">5. Demo pre-warm script.</span>
+    <code>npm run prewarm</code> generates and caches the exact demo path. Then a flaky venue
+    network, a rate limit, or an expired key cannot touch the pitch.
+    <span class="feat-done">the demo path loads from cache with the API key removed entirely.</span>
+  </div>
+</div>
+
+<h2>Member 4 &mdash; Prep Flow (frontend)</h2>
+
+<div class="member">
+  <div class="member-head">
+    <div class="member-title">You own everything she touches. Three taps from open to pack.</div>
+  </div>
+  <div class="feat"><span class="feat-name">1. The picker.</span>
+    Subject &rarr; strand &rarr; sub-strand. Build it against
+    <code>GET /api/packs/sample</code> from minute one — don't wait for Members 1 and 2.
+    <span class="feat-done">three taps reach a sub-strand on a phone-width screen.</span>
+  </div>
+  <div class="feat"><span class="feat-name">2. Context form.</span>
+    Class size, lesson minutes, language, resource level — all with defaults good enough to
+    skip. Every extra field costs a tap, and she is doing this at 9pm.
+    <span class="feat-done">she can go straight from picker to Build without typing anything.</span>
+  </div>
+  <div class="feat"><span class="feat-name">3. Pack view.</span>
+    All eight sections in the fixed order, phone-shaped, skimmable in four minutes. If it can't
+    be skimmed at 9pm it won't be read at all.
+    <span class="feat-done">the sample pack renders completely, top to bottom, on a phone.</span>
+  </div>
+  <div class="feat"><span class="feat-name">4. Provenance chips.</span>
+    Every section labelled <em>from the design</em> / <em>generated</em>, with the citation line
+    where one exists. This is the visible form of the project's core rule — it is a feature, not
+    a footnote.
+    <span class="feat-done">no section renders without a provenance chip.</span>
+  </div>
+  <div class="feat"><span class="feat-name">5. Honest progress.</span>
+    Generation takes 20&ndash;40 seconds. Name what's being built as it lands, section by
+    section. Never a bare spinner, never a blank screen.
+    <span class="feat-done">a first-time user never wonders whether it has hung.</span>
+  </div>
+</div>
+
+<div class="page-break"></div>
+<h2>Member 5 &mdash; Offline, Print &amp; Share</h2>
+
+<div class="member">
+  <div class="member-head">
+    <div class="member-title">You own the claim the whole pitch rests on. Your work is the demo's spine.</div>
+  </div>
+  <div class="feat"><span class="feat-name">1. Installable PWA.</span>
+    Service worker precaches the app shell; installs to an Android home screen. No app store, no
+    download, no 40MB APK on her data bundle.
+    <span class="feat-done">it installs on a real phone and opens from the home screen.</span>
+  </div>
+  <div class="feat"><span class="feat-name">2. IndexedDB pack store.</span>
+    Save on generate, read on open. <strong>Local first, network as fallback</strong> — offline
+    is the expected state in her classroom, not the error case.
+    <span class="feat-done">opening a saved pack makes no network request at all.</span>
+  </div>
+  <div class="feat"><span class="feat-name">3. Airplane-mode proof.</span>
+    The <code>verifiedOffline</code> badge, set once a pack has been opened with no network. And
+    the offline banner reads "your saved packs still work" — never an error.
+    <span class="feat-done">wifi off, hard reload, pack still opens. Rehearse this one.</span>
+  </div>
+  <div class="feat"><span class="feat-name">4. Print stylesheet.</span>
+    Whole pack on two sides of A4. Sections never split across a page break. Provenance survives
+    to paper — a printed claim with no source is exactly the failure we exist to prevent.
+    <span class="feat-done">it prints on real A4 and you'd teach from the printout.</span>
+  </div>
+  <div class="feat"><span class="feat-name">5. Share.</span>
+    Web Share API to push the exported file to WhatsApp or Bluetooth, with a plain download
+    fallback. Zero-infrastructure teacher-to-teacher distribution — sneakernet as a feature.
+    <span class="feat-done">a pack moves from one phone to another with no server involved.</span>
+  </div>
+</div>
+
+<h2>Contracts and merge protocol</h2>
+<ul>
+  <li><strong><code>shared/src/*</code> is frozen.</strong> It's the reason five people can work
+    at once. Changing it needs a group decision, and everyone runs
+    <code>npm run build:shared</code> after pulling.</li>
+  <li><strong>Branch per member</strong> — <code>m1-curriculum</code>, <code>m2-generation</code>,
+    and so on. Touch only your own directories.</li>
+  <li><strong>Merge continuously, not at the end.</strong> Anyone still sitting on a six-hour-old
+    branch at hour five is a merge disaster with a countdown on it.</li>
+  <li><strong><code>main</code> must always start.</strong> If your merge breaks
+    <code>docker compose up</code>, you stop and fix it before anything else.</li>
+  <li><strong>Build against <code>GET /api/packs/sample</code>.</strong> Nobody waits for anybody.</li>
+</ul>
+
+<h2>Shape of the day</h2>
+<table class="timeline">
+  <tr><th>Hour</th><th>What happens</th></tr>
+  <tr><td>0&ndash;0.5</td><td>All five run <code>docker compose up</code> and see the sample pack render. <strong>Nobody moves on until it works for everyone.</strong></td></tr>
+  <tr><td>0.5&ndash;2</td><td>M1 corpus &middot; M2 briefing prompt against the fixture &middot; M3 cache + endpoint &middot; M4 pickers &middot; M5 PWA install</td></tr>
+  <tr><td>2</td><td><strong>First merge to main.</strong></td></tr>
+  <tr><td>2&ndash;5</td><td>Core features. First real generated pack by hour four.</td></tr>
+  <tr><td>5</td><td><strong>Second merge. Feature freeze on anything not in the demo path.</strong></td></tr>
+  <tr><td>5&ndash;7</td><td>Export, print, offline verification, polish.</td></tr>
+  <tr><td>7</td><td><strong>Hard freeze. Pre-warm the cache.</strong></td></tr>
+  <tr><td>7&ndash;9</td><td>Rehearse the demo three times. Fix only what breaks the demo.</td></tr>
+</table>
+
+<h2>The demo, 90 seconds</h2>
+<ol class="demo">
+  <li>"It's 8:47pm. Grade 10, period two tomorrow. She has never taught this strand, and there is no textbook."</li>
+  <li>Three taps: subject, strand, sub-strand.</li>
+  <li>The pack appears. Scroll the briefing. <em>"This teaches her, not the class. That's the part everyone else skips."</em></li>
+  <li>Point at a provenance chip. <em>"This line is from the design, page 24. This one we generated — and we say so, because she has no way to check us."</em></li>
+  <li><strong>Turn on airplane mode. Hard reload.</strong> Still there.</li>
+  <li>Print preview. Two sides of A4, because there's no power at the front of the room.</li>
+  <li><em>"No child logs in. There is no student table in our schema. Audit it."</em></li>
+</ol>
+
+<h2>Four things we are deliberately not building</h2>
+<ul>
+  <li><strong>No learner-facing anything.</strong> No child logs in, no names, no submitted work,
+    no photographs of exercise books. It's structural, not a policy promise — and one
+    "share it with students" feature would disqualify us.</li>
+  <li><strong>No vector database or embeddings.</strong> A few dozen sub-strands is a JSON file.
+    Chunked retrieval would also break our citations, which are the product.</li>
+  <li><strong>No PDF parser.</strong> Automated table extraction on these designs will eat four
+    hours and produce mush. Manual entry of six sub-strands takes under an hour and is flawless.
+    In a one-day build, typing is the correct engineering decision.</li>
+  <li><strong>No on-device model.</strong> "No internet in the room" is not "no internet ever".
+    She preps at home on data; the <em>artifact</em> is what goes offline.</li>
+</ul>
+
+<footer>
+  Elimu &middot; Mwalimu wa Grade 10 &mdash; team brief. Repo <code>README.md</code> has setup;
+  <code>data/curriculum/README.md</code> has the corpus format. The sample pack fixture in
+  <code>shared/src/fixtures/</code> contains <strong>invented page numbers</strong> — never
+  demo with citations that came from it.
+</footer>
+
+</body>
+</html>
