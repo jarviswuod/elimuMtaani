@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -28,7 +29,9 @@ export default function OnboardingPage() {
   }
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center px-4 py-16">
+    <div className="flex flex-1 flex-col">
+      <SiteHeader />
+      <main className="flex flex-1 flex-col items-center justify-center px-4 py-16">
       <div className="w-full max-w-lg text-center">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
           Karibu! How will you use elimu<span className="text-primary">Mtaani</span>?
@@ -59,6 +62,7 @@ export default function OnboardingPage() {
           </button>
         </div>
       </div>
-    </main>
+      </main>
+    </div>
   );
 }
