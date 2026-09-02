@@ -10,8 +10,18 @@ Architecture → Build handoff. The Architect Pack for Sprint 001 is complete an
 
 | Sprint | Status |
 |---|---|
-| 001-unified-hackathon-demo | **In build — Checkpoint 1 auth done** |
-| 002-game-based-learning | **Pack complete — blocked on 001 Checkpoints 1–3** |
+| 001-unified-hackathon-demo | **BUILT — all 4 checkpoints shipped** (2026-09-02) |
+| 002-game-based-learning | **BUILT — checkpoints A/B/C shipped** (2026-09-02) |
+
+## What shipped (2026-09-02)
+
+**Sprint 001:** student topic→narrated lecture (SlidePlayer, SpeechSynthesis per Q-001 fallback) → quiz (instant grading) → lecture-scoped chat (open lectures only); teacher research (pasted text) → one-call term timetable (RISK-006 pad/trim) → sequential day-unlock grid → lazy session generation (RISK-001) → post-session gate; leaderboard (delivered ×10, recovered ×15); student read-only review with AI banner + haiku simplified summary.
+
+**Sprint 002:** gameLibrary (8 general entries seeded) → deterministic match → haiku adapt → opus generate gated by the materials allowlist with named-violation retry + library fallback (DEC-015/016); GameCard with provenance badge + worked/didn't-work rating (US-25/Q-006); understanding gate as append-only sessions.attempts[] with advance-guard, game-round review (zero calls, NFR-22), merge-into-tomorrow escape hatch (DEC-017).
+
+**Running state:** Convex deployment `fortunate-dove-790` has full schema + seeded library; `ELIMU_USE_FIXTURES=true` (no ANTHROPIC_API_KEY set). To go live: `cd web && npx convex env set ANTHROPIC_API_KEY sk-ant-... && npx convex env set ELIMU_USE_FIXTURES false`, then run the RISK-008 real-API smoke test.
+
+**Remaining (cut-order items, not blockers):** Magpie TTS (Q-001), KICD scrape + YouTube transcripts (RISK-005 stretch), US-27 gate-strictness preference, US-28 printable game card.
 
 ## Next Action
 

@@ -9,13 +9,16 @@
  */
 
 import type * as actions_chat from "../actions/chat.js";
+import type * as actions_generateGame from "../actions/generateGame.js";
 import type * as actions_generateLecture from "../actions/generateLecture.js";
 import type * as actions_generateQuiz from "../actions/generateQuiz.js";
 import type * as actions_generateTimetable from "../actions/generateTimetable.js";
 import type * as actions_simplify from "../actions/simplify.js";
 import type * as chat from "../chat.js";
+import type * as fixtures_gameLibrary from "../fixtures/gameLibrary.js";
 import type * as fixtures_lecture from "../fixtures/lecture.js";
 import type * as fixtures_timetable from "../fixtures/timetable.js";
+import type * as games from "../games.js";
 import type * as leaderboard from "../leaderboard.js";
 import type * as lectures from "../lectures.js";
 import type * as lib_claude from "../lib/claude.js";
@@ -33,13 +36,16 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   "actions/chat": typeof actions_chat;
+  "actions/generateGame": typeof actions_generateGame;
   "actions/generateLecture": typeof actions_generateLecture;
   "actions/generateQuiz": typeof actions_generateQuiz;
   "actions/generateTimetable": typeof actions_generateTimetable;
   "actions/simplify": typeof actions_simplify;
   chat: typeof chat;
+  "fixtures/gameLibrary": typeof fixtures_gameLibrary;
   "fixtures/lecture": typeof fixtures_lecture;
   "fixtures/timetable": typeof fixtures_timetable;
+  games: typeof games;
   leaderboard: typeof leaderboard;
   lectures: typeof lectures;
   "lib/claude": typeof lib_claude;

@@ -35,7 +35,46 @@ export default defineSchema({
     deliveredBy: v.optional(v.id("users")),
     createdBy: v.id("users"),
     simplifiedSummary: v.optional(v.string()), // cached haiku output for the student review view
+    // Game branch (Sprint 002, DEC-015/016/018): teacher-facilitated,
+    // classroom-only — no digital surface a learner touches.
+    game: v.optional(
+      v.object({
+        source: v.union(v.literal("library"), v.literal("generated")),
+        libraryEntryId: v.optional(v.id("gameLibrary")),
+        name: v.string(),
+        setup: v.string(),
+        rules: v.array(v.string()),
+        mechanics: v.object({
+          turns: v.string(),
+          challenge: v.string(),
+          winCondition: v.string(),
+        }),
+        materials: v.array(v.string()),
+        durationMinutes: v.number(),
+        groupPlan: v.string(),
+        teacherReviewed: v.optional(v.boolean()),
+      }),
+    ),
   }).index("by_createdBy", ["createdBy"]),
+
+  // General-purpose classroom game library (DEC-015: general, not per-subject).
+  // Every entry must read as REAL game rules (DEC-016): turns, challenge, win.
+  gameLibrary: defineTable({
+    name: v.string(),
+    thinkingType: v.union(v.literal("recall"), v.literal("application")),
+    materials: v.array(v.string()),
+    playersAtOnce: v.string(),
+    durationMinutes: v.number(),
+    mechanics: v.object({
+      turns: v.string(),
+      challenge: v.string(),
+      winCondition: v.string(),
+    }),
+    tags: v.array(v.string()),
+    timesUsed: v.number(),
+    worked: v.number(),
+    didntWork: v.number(),
+  }).index("by_thinkingType", ["thinkingType"]),
 
   chatMessages: defineTable({
     lectureId: v.id("lectures"),

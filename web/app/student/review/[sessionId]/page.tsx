@@ -6,6 +6,7 @@ import { useAction, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { SlidePlayer } from "@/components/SlidePlayer";
+import { GameCard } from "@/components/GameCard";
 
 /**
  * Read-only review of a teacher-delivered session (US-10).
@@ -70,6 +71,13 @@ export default function ReviewSessionPage({
       <div className="mt-6">
         <SlidePlayer slides={lecture.slides} mode="review" topic={lecture.topic} />
       </div>
+
+      {/* Classroom game shown read-only — it's class history, not a playable surface (R1) */}
+      {lecture.game && (
+        <div className="mt-8">
+          <GameCard game={lecture.game} lectureId={lecture._id} canRate={false} />
+        </div>
+      )}
     </main>
   );
 }

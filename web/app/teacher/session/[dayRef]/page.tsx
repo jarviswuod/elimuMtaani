@@ -7,6 +7,7 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { SlidePlayer } from "@/components/SlidePlayer";
 import { QuizCard } from "@/components/QuizCard";
+import { GameCard } from "@/components/GameCard";
 import { ProgressNarrator } from "@/components/ProgressNarrator";
 
 // dayRef = `${timetableId}_${weekIdx}_${dayIdx}`
@@ -120,6 +121,13 @@ export default function SessionPage({ params }: { params: Promise<{ dayRef: stri
           <>
             <SlidePlayer slides={lecture.slides} mode="live" topic={lecture.topic} />
 
+            {/* Game branch (Sprint 002): appears when ready — generated async */}
+            {lecture.game && (
+              <div className="mt-8">
+                <GameCard game={lecture.game} lectureId={lecture._id} canRate />
+              </div>
+            )}
+
             {/* Post-session understanding gate (US-07, DEC-017) */}
             <div className="mt-8">
               <h2 className="text-lg font-bold">After the session: check understanding</h2>
@@ -153,12 +161,15 @@ export default function SessionPage({ params }: { params: Promise<{ dayRef: stri
                     <button
                       type="button"
                       onClick={() => {
-                        judge(false, "recap");
+                        // Zero model calls (NFR-22): replaying the game / recapping is free.
+                        judge(false, lecture.game ? "game_round" : "recap");
                         setLastScore(null); // back to re-quiz state after the review round
                       }}
                       className="min-h-11 cursor-pointer rounded-xl border border-border bg-card px-5 font-semibold transition-colors duration-200 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                     >
-                      Not yet — review round, then re-quiz
+                      {lecture.game
+                        ? "Not yet — another game round, then re-quiz"
+                        : "Not yet — review round, then re-quiz"}
                     </button>
                     {revisitSuggested && !merged && (
                       <button

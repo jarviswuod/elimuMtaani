@@ -1,7 +1,7 @@
 "use node";
 
 import { action } from "../_generated/server";
-import { internal } from "../_generated/api";
+import { internal, api } from "../_generated/api";
 import type { Id } from "../_generated/dataModel";
 import { v } from "convex/values";
 import { generateObject, useFixtures } from "../lib/claude";
@@ -62,6 +62,11 @@ export const run = action({
         ...args.timetableRef,
         lectureId,
       });
+    }
+    // Game branch (Sprint 002, DEC-015): classroom sessions get a game,
+    // scheduled async so the lecture returns immediately.
+    if (args.source === "cbc") {
+      await ctx.scheduler.runAfter(0, api.actions.generateGame.run, { lectureId });
     }
     return lectureId;
   },
