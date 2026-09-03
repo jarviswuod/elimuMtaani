@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>elimuMtaani — Hackathon Demo Pitch</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --background: #faf6ef;
+    --foreground: #1f2a24;
+    --primary: #1e6b4e;
+    --on-primary: #ffffff;
+    --secondary: #7fb69a;
+    --on-secondary: #1f2a24;
+    --accent: #c4521f;
+    --on-accent: #ffffff;
+    --card: #ffffff;
+    --card-foreground: #1f2a24;
+    --muted: #eee7d9;
+    --muted-foreground: #5b6660;
+    --border: #ddd3bd;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Karla', system-ui, -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    overflow: hidden;
+  }
+  .slide-deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  @media (min-width: 769px) {
+    .slide-deck {
+      max-width: calc(100vh * 16 / 9);
+      max-height: calc(100vw * 9 / 16);
+      margin: auto;
+      position: absolute;
+      inset: 0;
+    }
+  }
+  .slide {
+    position: absolute;
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 64px 72px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s;
+    background: var(--background);
+    overflow: hidden;
+  }
+  .slide.active { opacity: 1; visibility: visible; }
+  .slide-content {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+  }
+  h1, h2 { font-family: var(--font-display); font-weight: 700; }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .slide-title {
+    font-size: clamp(30px, 5.2vw, 60px);
+    color: var(--primary);
+    line-height: 1.08;
+  }
+  .slide-title .accent { color: var(--accent); }
+  .subtitle {
+    font-size: clamp(15px, 2.2vw, 20px);
+    color: var(--muted-foreground);
+    max-width: 640px;
+    line-height: 1.5;
+  }
+  .logo-mark {
+    display: flex; align-items: center; justify-content: center;
+    width: 72px; height: 72px; border-radius: 20px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--on-primary);
+    font-family: var(--font-display);
+    font-size: 34px; font-weight: 700;
+    box-shadow: 0 10px 30px rgba(30,107,78,0.25);
+  }
+  .bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+    max-width: 620px;
+  }
+  .bullets li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: clamp(15px, 1.9vw, 19px);
+    line-height: 1.5;
+    color: var(--foreground);
+  }
+  .bullets li .dot {
+    flex-shrink: 0; margin-top: 7px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px 18px;
+    text-align: left;
+    box-shadow: 0 2px 14px rgba(31,42,36,0.05);
+  }
+  .card .icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--muted); color: var(--primary);
+    margin-bottom: 10px; font-size: 20px;
+  }
+  .card h3 { font-family: var(--font-body); font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+  .card p { font-size: 13.5px; color: var(--muted-foreground); line-height: 1.45; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--muted); color: var(--primary);
+    border: 1px solid var(--border);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 13px; font-weight: 700;
+  }
+  .step-flow {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; flex-wrap: wrap;
+    max-width: 920px;
+  }
+  .step-flow .arrow { color: var(--muted-foreground); font-size: 18px; }
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 880px;
+  }
+  .stack-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 13.5px;
+  }
+  .stack-item .label { font-weight: 800; color: var(--primary); display: block; margin-bottom: 3px; }
+  .stack-item .detail { color: var(--muted-foreground); }
+  .chart-container { width: min(70%, 520px); height: clamp(180px, 32vh, 260px); }
+  .cta-box {
+    background: var(--primary);
+    color: var(--on-primary);
+    border-radius: 20px;
+    padding: 20px 32px;
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.6vw, 26px);
+    font-weight: 700;
+  }
+  .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); transition: width 0.3s; z-index: 1000; }
+  .nav-controls {
+    position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 18px; z-index: 1000;
+  }
+  .nav-btn {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--foreground); width: 38px; height: 38px; border-radius: 50%;
+    cursor: pointer; font-size: 16px;
+  }
+  .nav-btn:hover { background: var(--muted); }
+  .slide-counter { color: var(--muted-foreground); font-size: 13px; font-weight: 700; }
+  @media (max-width: 768px) {
+    .slide { padding: 32px 22px; }
+    .grid-3, .stack-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="slide-deck">
+
+  <!-- 1. Title / Hook -->
+  <div class="slide active">
+    <div class="slide-content">
+      <div class="logo-mark">e</div>
+      <p class="eyebrow">Hackathon Demo · 3 minutes</p>
+      <h1 class="slide-title">elimu<span class="accent">Mtaani</span></h1>
+      <p class="subtitle" style="font-size: clamp(18px,2.6vw,24px); color: var(--primary); font-weight: 700; font-family: var(--font-display);">
+        Teach tomorrow's lesson tonight.
+      </p>
+      <p class="subtitle">An AI-powered teaching assistant for Kenya's Competency-Based Curriculum — built for teachers and students.</p>
+    </div>
+  </div>
+
+  <!-- 2. Problem -->
+  <div class="slide">
+    <div class="slide-content">
+      <p class="eyebrow">The problem</p>
+      <h2 class="slide-title" style="font-size: clamp(26px,4vw,42px);">Lesson prep eats evenings.<br>Help ends at the bell.</h2>
+      <ul class="bullets" style="margin-top: 8px;">
+        <li><span class="dot"></span>Teachers spend hours every week planning lessons against scarce, scattered curriculum resources.</li>
+        <li><span class="dot"></span>Building a term timetable, slides, and a quiz from scratch is repeated, manual work every single week.</li>
+        <li><span class="dot"></span>Once class ends, students have nowhere to ask "wait, why does that work?" until the next lesson.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3. Solution overview -->
+  <div class="slide">
+    <div class="slide-content">
+      <p class="eyebrow">The solution</p>
+      <h2 class="slide-title" style="font-size: clamp(26px,4vw,42px);">One platform, research to delivered lesson.</h2>
+      <div class="step-flow" style="margin-top: 6px;">
+        <span class="pill">Paste / upload research</span>
+        <span class="arrow">→</span>
+        <span class="pill">AI term timetable</span>
+        <span class="arrow">→</span>
+        <span class="pill">Narrated slides</span>
+        <span class="arrow">→</span>
+        <span class="pill">Quiz</span>
+        <span class="arrow">→</span>
+        <span class="pill">Classroom game</span>
+      </div>
+      <p class="subtitle" style="margin-top: 14px;">Plus <strong style="color: var(--accent);">Mwalimu Brain</strong> — a floating AI tutor available to both teachers and students, on every page, all the time.</p>
+    </div>
+  </div>
+
+  <!-- 4. Feature: Knowledge Base + RAG -->
+  <div class="slide">
+    <div class="slide-content">
+      <p class="eyebrow">Feature · Knowledge base</p>
+      <h2 class="slide-title" style="font-size: clamp(24px,3.6vw,38px);">Real documents, real answers.</h2>
+      <div class="grid-3" style="margin-top: 6px;">
+        <div class="card">
+          <div class="icon">↑</div>
+          <h3>Upload anything</h3>
+          <p>PDF, DOCX, PPTX, CSV, or XLSX — teachers upload the materials they already have.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚙</div>
+          <h3>Parsed & embedded</h3>
+          <p>Text is chunked and embedded with NVIDIA NIM embeddings into a searchable vector index.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🔎</div>
+          <h3>Grounded retrieval</h3>
+          <p>The chatbot and student practice quizzes pull the most relevant chunks — answers rooted in real source material.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Feature: Mwalimu Brain -->
+  <div class="slide">
+    <div class="slide-content">
+      <p class="eyebrow">Feature · Mwalimu Brain</p>
+      <h2 class="slide-title" style="font-size: clamp(24px,3.6vw,38px);">An AI tutor that never sleeps.</h2>
+      <ul class="bullets">
+        <li><span class="dot"></span>A floating brain icon in the bottom-left corner — on every teacher and student page.</li>
+        <li><span class="dot"></span>Powered by <strong>Claude Sonnet 5</strong> — ask about any topic, any subject, anytime.</li>
+        <li><span class="dot"></span>Microphone input with live transcription — just speak your question.</li>
+        <li><span class="dot"></span>Spoken answers via NVIDIA voice synthesis, with an instant browser-speech fallback.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6. Feature: Games + Leaderboards -->
+  <div class="slide">
+    <div class="slide-content">
+      <p class="eyebrow">Feature · Games & leaderboards</p>
+      <h2 class="slide-title" style="font-size: clamp(24px,3.6vw,38px);">Learning that competes for attention.</h2>
+      <div class="grid-3" style="margin-top: 6px;">
+        <div class="card">
+          <div class="icon">🎲</div>
+          <h3>Classroom games</h3>
+          <p>Library-first, AI-generated when needed — with a pre-class teacher review checklist before anything runs live.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🏆</div>
+          <h3>Student leaderboard</h3>
+          <p>Points from real quiz performance — every student sees their rank against classmates.</p>
+        </div>
+        <div class="card">
+          <div class="icon">👥</div>
+          <h3>Manage students</h3>
+          <p>Teachers get a full roster view: who's active, who's improving, who needs a nudge.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Tech stack -->
+  <div class="slide">
+    <div class="slide-content">
+      <p class="eyebrow">Under the hood</p>
+      <h2 class="slide-title" style="font-size: clamp(24px,3.6vw,38px);">Built for speed, priced for scale.</h2>
+      <div class="stack-grid" style="margin-top: 6px;">
+        <div class="stack-item"><span class="label">Next.js 16</span><span class="detail">App Router frontend, Turbopack build</span></div>
+        <div class="stack-item"><span class="label">Convex</span><span class="detail">Reactive DB, actions, native vector search</span></div>
+        <div class="stack-item"><span class="label">Clerk</span><span class="detail">Auth & role-based routing</span></div>
+        <div class="stack-item"><span class="label">Claude Opus</span><span class="detail">Lecture, timetable & quiz generation</span></div>
+        <div class="stack-item"><span class="label">Claude Sonnet 5</span><span class="detail">Mwalimu Brain conversational tutor</span></div>
+        <div class="stack-item"><span class="label">NVIDIA NIM</span><span class="detail">Embeddings + Magpie TTS voice</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Close / CTA -->
+  <div class="slide">
+    <div class="slide-content">
+      <p class="eyebrow">Impact</p>
+      <h2 class="slide-title" style="font-size: clamp(26px,4vw,42px);">Give teachers back their evenings.<br>Give students a tutor that never sleeps.</h2>
+      <div class="chart-container">
+        <canvas id="impactChart"></canvas>
+      </div>
+      <div class="cta-box" style="margin-top: 10px;">elimuMtaani — built for Kenya's classrooms.</div>
+      <p class="subtitle" style="margin-top: 4px;">Next: automated KICD & YouTube ingestion, full NVIDIA voice rollout.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" onclick="prevSlide()">←</button>
+  <span class="slide-counter"><span id="current">1</span> / <span id="total">8</span></span>
+  <button class="nav-btn" onclick="nextSlide()">→</button>
+</div>
+
+<script>
+  let current = 1;
+  const total = document.querySelectorAll('.slide').length;
+  document.getElementById('total').textContent = total;
+
+  function showSlide(n) {
+    if (n < 1) n = 1;
+    if (n > total) n = total;
+    current = n;
+    document.querySelectorAll('.slide').forEach((s, i) => {
+      s.classList.toggle('active', i === n - 1);
+    });
+    document.getElementById('current').textContent = n;
+    document.getElementById('progressBar').style.width = (n / total * 100) + '%';
+  }
+  function nextSlide() { showSlide(current + 1); }
+  function prevSlide() { showSlide(current - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-controls') && !e.target.closest('canvas')) nextSlide();
+  });
+
+  showSlide(1);
+
+  new Chart(document.getElementById('impactChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Manual lesson prep', 'With elimuMtaani'],
+      datasets: [{
+        label: 'Hours per week',
+        data: [8, 1.5],
+        backgroundColor: ['#c4521f', '#1e6b4e'],
+        borderRadius: 8,
+        maxBarThickness: 70
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#5b6660', font: { size: 12 } } },
+        y: { grid: { color: 'rgba(31,42,36,0.06)' }, ticks: { color: '#5b6660' }, title: { display: true, text: 'Hours / week', color: '#5b6660' } }
+      }
+    }
+  });
+</script>
+</body>
+</html>

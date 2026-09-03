@@ -46,7 +46,9 @@ export function ChatPanel({ lectureId }: { lectureId: Id<"lectures"> }) {
     [],
   );
   const { state: micState, start: startMic, stop: stopMic } = useSpeechInput(onTranscript);
-  const { speaking, speakText } = useSpeaking();
+  const synthesizeAction = useAction(api.tts.synthesize);
+  const synthesize = useCallback((text: string) => synthesizeAction({ text }), [synthesizeAction]);
+  const { speaking, speakText } = useSpeaking(synthesize);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();

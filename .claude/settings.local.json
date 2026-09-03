@@ -20,7 +20,13 @@
       "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const p=JSON.parse\\(d\\);console.log\\('sections:',Object.keys\\(p.sections\\).join\\(', '\\)\\);console.log\\('spine total:',p.sections.spine.steps.reduce\\(\\(a,s\\)=>a+s.durationMinutes,0\\),'min of',p.context.lessonMinutes\\);console.log\\('warnings:',p.warnings\\);}\\)\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" localhost:4000/api/packs/nope)",
       "Bash(pkill -f \"tsx src/index.ts\")",
-      "Bash(npx vite *)"
+      "Bash(npx vite *)",
+      "Bash(rtk find *)",
+      "Bash(rtk ls *)",
+      "Bash(rtk wc *)"
     ]
-  }
+  },
+  "disabledMcpjsonServers": [
+    "convex"
+  ]
 }

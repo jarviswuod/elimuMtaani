@@ -1,42 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { useAction, useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { GeneratedBadge } from "./GeneratedBadge";
 
-export function QuizCard({
-  lectureId,
-  onScored,
-}: {
-  lectureId: Id<"lectures">;
-  onScored?: (score: number) => void;
-}) {
-  const quiz = useQuery(api.quizzes.forLecture, { lectureId });
-  const generate = useAction(api.actions.generateQuiz.run);
-  const recordScore = useMutation(api.quizzes.recordScore);
-  const history = useQuery(api.quizzes.history, quiz ? { quizId: quiz._id } : "skip");
-  const [busy, setBusy] = useState(false);
+export function PracticeQuizCard({ practiceQuizId }: { practiceQuizId: Id<"practiceQuizzes"> }) {
+  const quiz = useQuery(api.practiceQuizzes.get, { id: practiceQuizId });
+  const history = useQuery(api.practiceQuizzes.history, { practiceQuizId });
+  const recordScore = useMutation(api.practiceQuizzes.recordScore);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [graded, setGraded] = useState(false);
 
-  async function startQuiz() {
-    setBusy(true);
-    try {
-      await generate({ lectureId });
-    } finally {
-      setBusy(false);
-    }
-  }
+  if (quiz === undefined) return null;
+  if (quiz === null) return <p className="text-sm text-muted-foreground">Quiz not found.</p>;
+
+  const allAnswered = quiz.questions.every((_, i) => answers[i] !== undefined);
+  const correctCount = quiz.questions.filter((q, i) => answers[i] === q.answerIdx).length;
 
   async function grade() {
-    if (!quiz) return;
-    const correct = quiz.questions.filter((q, i) => answers[i] === q.answerIdx).length;
-    const score = correct / quiz.questions.length;
+    const score = correctCount / quiz!.questions.length;
     setGraded(true);
-    await recordScore({ quizId: quiz._id, score });
-    onScored?.(score);
+    await recordScore({ practiceQuizId, score });
   }
 
   function retake() {
@@ -44,34 +30,16 @@ export function QuizCard({
     setGraded(false);
   }
 
-  if (quiz === undefined) return null;
-
-  if (quiz === null) {
-    return (
-      <section className="rounded-2xl border border-border bg-card p-6">
-        <h2 className="text-lg font-bold">Check your understanding</h2>
-        <p className="mt-1 text-sm text-muted-foreground">A short quiz on this lecture.</p>
-        <button
-          type="button"
-          onClick={startQuiz}
-          disabled={busy}
-          className="mt-4 min-h-11 cursor-pointer rounded-xl bg-primary px-5 font-semibold text-on-primary transition-colors duration-200 hover:bg-primary/90 disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-        >
-          {busy ? "Preparing quiz…" : "Take the quiz"}
-        </button>
-      </section>
-    );
-  }
-
-  const allAnswered = quiz.questions.every((_, i) => answers[i] !== undefined);
-  const correctCount = quiz.questions.filter((q, i) => answers[i] === q.answerIdx).length;
-
   return (
     <section className="rounded-2xl border border-border bg-card p-6">
       <div className="flex items-center justify-between gap-3">
-        <h2 className="text-lg font-bold">Quiz</h2>
+        <h2 className="text-lg font-bold">{quiz.topic}</h2>
         <GeneratedBadge />
       </div>
+      <p className="mt-1 text-xs text-muted-foreground">
+        {quiz.grade} · {quiz.subject}
+      </p>
+
       <ol className="mt-4 space-y-6">
         {quiz.questions.map((q, qi) => (
           <li key={q.q}>
@@ -104,12 +72,11 @@ export function QuizCard({
                 );
               })}
             </div>
-            {graded && (
-              <p className="mt-2 text-xs text-muted-foreground">{q.explanation}</p>
-            )}
+            {graded && <p className="mt-2 text-xs text-muted-foreground">{q.explanation}</p>}
           </li>
         ))}
       </ol>
+
       {graded ? (
         <div className="mt-6 space-y-3">
           <p className="rounded-xl bg-muted p-4 text-center font-bold">

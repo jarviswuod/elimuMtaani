@@ -53,6 +53,18 @@ export const attachGame = internalMutation({
   },
 });
 
+/** Pre-class review gate (RISK-009/Q-006): teacher confirms the checklist before "Start". */
+export const markReviewed = mutation({
+  args: { lectureId: v.id("lectures") },
+  handler: async (ctx, { lectureId }) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+    const lecture = await ctx.db.get(lectureId);
+    if (!lecture?.game) throw new Error("No game on this lecture");
+    await ctx.db.patch(lectureId, { game: { ...lecture.game, teacherReviewed: true } });
+  },
+});
+
 /** Post-game rating (US-25): feeds library match quality; flags generated games (Q-006). */
 export const rateGame = mutation({
   args: { lectureId: v.id("lectures"), worked: v.boolean() },

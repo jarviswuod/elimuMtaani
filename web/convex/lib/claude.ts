@@ -6,6 +6,7 @@ import type { z } from "zod";
 
 export const GEN_MODEL = "claude-opus-4-8"; // generation: lectures, timetables, quizzes, games
 export const CHEAP_MODEL = "claude-haiku-4-5"; // grading feedback, simplification, adaptation
+export const SONNET_MODEL = "claude-sonnet-5"; // Mwalimu Brain: general Q&A chatbot
 
 /** Fixtures mode (DEC-010): demo insurance — no key or explicit flag → no external calls. */
 export function useFixtures(): boolean {

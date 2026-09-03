@@ -71,19 +71,45 @@ export function stopSpeaking() {
   if (typeof window !== "undefined") window.speechSynthesis?.cancel();
 }
 
-export function useSpeaking() {
+/**
+ * `synthesize` (optional) tries NVIDIA TTS first (RISK-003 fallback chain);
+ * on null/error, falls back to the browser's SpeechSynthesis.
+ */
+export function useSpeaking(synthesize?: (text: string) => Promise<{ url: string } | null>) {
   const [speaking, setSpeaking] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const stop = useCallback(() => {
+    audioRef.current?.pause();
+    audioRef.current = null;
+    stopSpeaking();
+    setSpeaking(false);
+  }, []);
+
   const speakText = useCallback(
-    (text: string) => {
+    async (text: string) => {
       if (speaking) {
-        stopSpeaking();
-        setSpeaking(false);
+        stop();
         return;
       }
       setSpeaking(true);
+      try {
+        const result = await synthesize?.(text);
+        if (result?.url) {
+          const audio = new Audio(result.url);
+          audioRef.current = audio;
+          audio.onended = () => setSpeaking(false);
+          audio.onerror = () => speak(text, { onEnd: () => setSpeaking(false) });
+          await audio.play();
+          return;
+        }
+      } catch {
+        // fall through to browser TTS
+      }
       speak(text, { onEnd: () => setSpeaking(false) });
     },
-    [speaking],
+    [speaking, stop, synthesize],
   );
-  return { speaking, speakText, stopSpeaking };
+
+  return { speaking, speakText, stopSpeaking: stop };
 }

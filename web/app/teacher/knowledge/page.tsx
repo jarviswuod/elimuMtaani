@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { KICD_LINKS, searchKicdLinks } from "@/lib/kicd";
+import { searchKicdLinks } from "@/lib/kicd";
+import { DocumentUpload } from "@/components/DocumentUpload";
+import { DocumentList } from "@/components/DocumentList";
 
 const CATEGORY_LABELS: Record<string, string> = {
   curriculum: "Curriculum",
@@ -43,11 +45,17 @@ export default function KnowledgeBasePage() {
         </div>
       </div>
 
+      <div className="mt-6">
+        <DocumentUpload />
+        <DocumentList />
+      </div>
+
+      <h2 className="mt-10 text-xl font-bold">Curated CBC links</h2>
       <input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search by subject, grade, or topic…"
-        className="mt-6 min-h-11 w-full rounded-xl border border-border bg-background px-4 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        className="mt-3 min-h-11 w-full rounded-xl border border-border bg-background px-4 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       />
 
       {results.length === 0 ? (

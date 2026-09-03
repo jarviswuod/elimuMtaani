@@ -8,6 +8,8 @@ import { Id } from "@/convex/_generated/dataModel";
 import { SlidePlayer } from "@/components/SlidePlayer";
 import { QuizCard } from "@/components/QuizCard";
 import { GameCard } from "@/components/GameCard";
+import { GameReviewChecklist } from "@/components/GameReviewChecklist";
+import { GameCompanionView } from "@/components/GameCompanionView";
 import { ProgressNarrator } from "@/components/ProgressNarrator";
 
 // dayRef = `${timetableId}_${weekIdx}_${dayIdx}`
@@ -123,8 +125,13 @@ export default function SessionPage({ params }: { params: Promise<{ dayRef: stri
 
             {/* Game branch (Sprint 002): appears when ready — generated async */}
             {lecture.game && (
-              <div className="mt-8">
+              <div className="mt-8 space-y-6">
                 <GameCard game={lecture.game} lectureId={lecture._id} canRate />
+                {lecture.game.source === "generated" && !lecture.game.teacherReviewed ? (
+                  <GameReviewChecklist lectureId={lecture._id} onReviewed={() => {}} />
+                ) : (
+                  <GameCompanionView game={lecture.game} />
+                )}
               </div>
             )}
 

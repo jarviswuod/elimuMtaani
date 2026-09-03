@@ -32,6 +32,24 @@ export const ensureUser = mutation({
   },
 });
 
+/** Teacher's student roster (US: "manage students") — every student user, active or not. */
+export const listStudents = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return [];
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+      .unique();
+    if (!user || user.role !== "teacher") return [];
+    const all = await ctx.db.query("users").collect();
+    return all
+      .filter((u) => u.role === "student")
+      .map((u) => ({ _id: u._id, displayName: u.displayName }));
+  },
+});
+
 /** One-time role selection from the onboarding screen. */
 export const setRole = mutation({
   args: { role: v.union(v.literal("student"), v.literal("teacher")) },

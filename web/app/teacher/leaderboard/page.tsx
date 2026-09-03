@@ -6,6 +6,7 @@ import { api } from "@/convex/_generated/api";
 
 export default function LeaderboardPage() {
   const rows = useQuery(api.leaderboard.rankings);
+  const studentRows = useQuery(api.studentLeaderboard.rankings);
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 sm:px-6">
@@ -51,6 +52,43 @@ export default function LeaderboardPage() {
                   avg understanding {Math.round(r.avgScore * 100)}%
                 </p>
               </div>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      <h2 className="mt-12 text-2xl font-extrabold tracking-tight">Student leaderboard</h2>
+      <p className="mt-2 text-muted-foreground">
+        Points from quiz and practice-quiz activity — the same ranking students see themselves.
+      </p>
+      {studentRows === undefined ? (
+        <p className="mt-8 text-sm text-muted-foreground">Loading…</p>
+      ) : studentRows.length === 0 ? (
+        <p className="mt-8 rounded-2xl border border-border bg-card p-8 text-center text-muted-foreground">
+          No quiz attempts yet.
+        </p>
+      ) : (
+        <ol className="mt-8 space-y-3">
+          {studentRows.map((r, i) => (
+            <li
+              key={r.userId}
+              className="flex items-center gap-4 rounded-2xl border border-border bg-card p-5"
+            >
+              <span
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg font-extrabold ${
+                  i === 0 ? "bg-primary text-on-primary" : "bg-muted text-muted-foreground"
+                }`}
+              >
+                {i + 1}
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="truncate font-bold">{r.name}</p>
+                <p className="text-xs text-muted-foreground">
+                  {r.quizzesTaken} quiz{r.quizzesTaken === 1 ? "" : "zes"} taken
+                  {r.badge && ` · ${r.badge} badge`}
+                </p>
+              </div>
+              <p className="text-lg font-extrabold text-primary">{r.points} pts</p>
             </li>
           ))}
         </ol>

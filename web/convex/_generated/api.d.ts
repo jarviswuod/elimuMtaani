@@ -8,14 +8,20 @@
  * @module
  */
 
+import type * as actions_brain from "../actions/brain.js";
 import type * as actions_chat from "../actions/chat.js";
 import type * as actions_generateGame from "../actions/generateGame.js";
 import type * as actions_generateLecture from "../actions/generateLecture.js";
+import type * as actions_generatePracticeQuiz from "../actions/generatePracticeQuiz.js";
 import type * as actions_generateQuiz from "../actions/generateQuiz.js";
 import type * as actions_generateTimetable from "../actions/generateTimetable.js";
+import type * as actions_parseDocument from "../actions/parseDocument.js";
 import type * as actions_simplify from "../actions/simplify.js";
 import type * as analytics from "../analytics.js";
+import type * as brain from "../brain.js";
 import type * as chat from "../chat.js";
+import type * as documentSearch from "../documentSearch.js";
+import type * as documents from "../documents.js";
 import type * as fixtures_gameLibrary from "../fixtures/gameLibrary.js";
 import type * as fixtures_lecture from "../fixtures/lecture.js";
 import type * as fixtures_timetable from "../fixtures/timetable.js";
@@ -23,12 +29,16 @@ import type * as games from "../games.js";
 import type * as leaderboard from "../leaderboard.js";
 import type * as lectures from "../lectures.js";
 import type * as lib_claude from "../lib/claude.js";
+import type * as lib_nvidia from "../lib/nvidia.js";
 import type * as notes from "../notes.js";
+import type * as practiceQuizzes from "../practiceQuizzes.js";
 import type * as quizzes from "../quizzes.js";
 import type * as research from "../research.js";
 import type * as seedDemo from "../seedDemo.js";
 import type * as sessions from "../sessions.js";
+import type * as studentLeaderboard from "../studentLeaderboard.js";
 import type * as timetables from "../timetables.js";
+import type * as tts from "../tts.js";
 import type * as users from "../users.js";
 
 import type {
@@ -38,14 +48,20 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  "actions/brain": typeof actions_brain;
   "actions/chat": typeof actions_chat;
   "actions/generateGame": typeof actions_generateGame;
   "actions/generateLecture": typeof actions_generateLecture;
+  "actions/generatePracticeQuiz": typeof actions_generatePracticeQuiz;
   "actions/generateQuiz": typeof actions_generateQuiz;
   "actions/generateTimetable": typeof actions_generateTimetable;
+  "actions/parseDocument": typeof actions_parseDocument;
   "actions/simplify": typeof actions_simplify;
   analytics: typeof analytics;
+  brain: typeof brain;
   chat: typeof chat;
+  documentSearch: typeof documentSearch;
+  documents: typeof documents;
   "fixtures/gameLibrary": typeof fixtures_gameLibrary;
   "fixtures/lecture": typeof fixtures_lecture;
   "fixtures/timetable": typeof fixtures_timetable;
@@ -53,12 +69,16 @@ declare const fullApi: ApiFromModules<{
   leaderboard: typeof leaderboard;
   lectures: typeof lectures;
   "lib/claude": typeof lib_claude;
+  "lib/nvidia": typeof lib_nvidia;
   notes: typeof notes;
+  practiceQuizzes: typeof practiceQuizzes;
   quizzes: typeof quizzes;
   research: typeof research;
   seedDemo: typeof seedDemo;
   sessions: typeof sessions;
+  studentLeaderboard: typeof studentLeaderboard;
   timetables: typeof timetables;
+  tts: typeof tts;
   users: typeof users;
 }>;
 

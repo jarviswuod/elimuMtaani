@@ -4,6 +4,7 @@ import { ReactNode, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
+import { MwalimuBrain } from "./MwalimuBrain";
 
 type NavItem = { href: string; label: string; icon: ReactNode };
 
@@ -17,12 +18,15 @@ const TEACHER_NAV: NavItem[] = [
   { href: "/teacher", label: "Dashboard", icon: icon("M3 12l9-9 9 9M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10") },
   { href: "/teacher/research", label: "New term", icon: icon("M12 5v14M5 12h14") },
   { href: "/teacher/knowledge", label: "Knowledge base", icon: icon("M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z") },
+  { href: "/teacher/students", label: "Students", icon: icon("M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75") },
   { href: "/teacher/notes", label: "Notes", icon: icon("M11 4H4v16h16v-7M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z") },
-  { href: "/teacher/leaderboard", label: "Leaderboard", icon: icon("M18 20V10M12 20V4M6 20v-6") },
+  { href: "/teacher/leaderboard", label: "Leaderboards", icon: icon("M18 20V10M12 20V4M6 20v-6") },
 ];
 
 const STUDENT_NAV: NavItem[] = [
   { href: "/student", label: "Dashboard", icon: icon("M3 12l9-9 9 9M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10") },
+  { href: "/student/practice", label: "Practice quizzes", icon: icon("M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11") },
+  { href: "/student/leaderboard", label: "Leaderboard", icon: icon("M18 20V10M12 20V4M6 20v-6") },
   { href: "/student/review", label: "Class review", icon: icon("M2 3h20M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3M7 21l5-5 5 5") },
   { href: "/student/notes", label: "Notes", icon: icon("M11 4H4v16h16v-7M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z") },
 ];
@@ -118,6 +122,7 @@ export function AppShell({ role, children }: { role: "teacher" | "student"; chil
         </header>
         <div className="flex-1">{children}</div>
       </div>
+      <MwalimuBrain />
     </div>
   );
 }

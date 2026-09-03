@@ -114,11 +114,10 @@ export default function ResearchPage() {
           Paste your source material
           <textarea
             required
-            minLength={100}
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows={10}
-            placeholder="Paste curriculum text, learning outcomes, topic lists… (min. 100 characters)"
+            placeholder="Paste curriculum text, learning outcomes, topic lists, or a source link…"
             className="mt-1.5 w-full rounded-xl border border-border bg-background p-3 text-sm leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           />
         </label>

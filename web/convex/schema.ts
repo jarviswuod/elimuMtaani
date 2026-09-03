@@ -82,6 +82,14 @@ export default defineSchema({
     body: v.string(),
   }).index("by_lectureId", ["lectureId"]),
 
+  // "Mwalimu Brain" — the floating, always-available general Q&A chatbot
+  // (not scoped to any one lecture), for both teachers and students.
+  brainMessages: defineTable({
+    userId: v.id("users"),
+    role: v.union(v.literal("user"), v.literal("assistant")),
+    body: v.string(),
+  }).index("by_userId", ["userId"]),
+
   quizzes: defineTable({
     lectureId: v.id("lectures"),
     questions: v.array(
@@ -95,6 +103,76 @@ export default defineSchema({
     score: v.optional(v.number()),
     takenBy: v.optional(v.id("users")),
   }).index("by_lectureId", ["lectureId"]),
+
+  // Every retake is kept (quizzes.score/takenBy stays the "latest" cache).
+  quizAttempts: defineTable({
+    quizId: v.id("quizzes"),
+    userId: v.id("users"),
+    score: v.number(),
+    takenAt: v.number(),
+  })
+    .index("by_quizId", ["quizId"])
+    .index("by_userId", ["userId"]),
+
+  // Standalone practice quiz, not tied to a lecture — generated from
+  // knowledge-base documents for a topic/grade/subject a student picks.
+  practiceQuizzes: defineTable({
+    createdBy: v.id("users"),
+    topic: v.string(),
+    grade: v.string(),
+    subject: v.string(),
+    questions: v.array(
+      v.object({
+        q: v.string(),
+        options: v.array(v.string()),
+        answerIdx: v.number(),
+        explanation: v.string(),
+      }),
+    ),
+  }).index("by_createdBy", ["createdBy"]),
+
+  practiceQuizAttempts: defineTable({
+    practiceQuizId: v.id("practiceQuizzes"),
+    userId: v.id("users"),
+    score: v.number(),
+    takenAt: v.number(),
+  })
+    .index("by_practiceQuizId", ["practiceQuizId"])
+    .index("by_userId", ["userId"]),
+
+  // Teacher-uploaded knowledge base documents (PDF/DOCX/PPTX/CSV/XLSX).
+  documents: defineTable({
+    teacherId: v.id("users"),
+    title: v.string(),
+    kind: v.union(
+      v.literal("pdf"),
+      v.literal("docx"),
+      v.literal("pptx"),
+      v.literal("csv"),
+      v.literal("xlsx"),
+    ),
+    storageId: v.id("_storage"),
+    grade: v.string(),
+    subject: v.string(),
+    term: v.number(),
+    status: v.union(v.literal("processing"), v.literal("ready"), v.literal("failed")),
+    error: v.optional(v.string()),
+  }).index("by_teacherId", ["teacherId"]),
+
+  // Chunked + embedded document text (RAG). Vector-searched for chatbot
+  // grounding and practice-quiz generation.
+  documentChunks: defineTable({
+    documentId: v.id("documents"),
+    text: v.string(),
+    chunkIdx: v.number(),
+    embedding: v.array(v.float64()),
+  })
+    .index("by_documentId", ["documentId"])
+    .vectorIndex("by_embedding", {
+      vectorField: "embedding",
+      dimensions: 1024, // nvidia/nv-embedqa-e5-v5 output size
+      filterFields: ["documentId"],
+    }),
 
   researchSources: defineTable({
     teacherId: v.id("users"),
